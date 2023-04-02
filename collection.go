@@ -14,10 +14,10 @@ func (c collectionImpl[T]) Size() int {
 }
 
 // Map maps all the values in a collection to a new collection.
-func Map[TFrom, TTo any](c Collection[TFrom], f func(TFrom) TTo) Collection[TTo] {
-	return collectionImpl[TTo]{
-		forEach: func(callback func(TTo) bool) {
-			c.ForEach(func(v TFrom) bool {
+func Map[from, to any](c Collection[from], f func(from) to) Collection[to] {
+	return collectionImpl[to]{
+		forEach: func(callback func(to) bool) {
+			c.ForEach(func(v from) bool {
 				return callback(f(v))
 			})
 		},

@@ -1,5 +1,6 @@
 package collections
 
+// deque via ring slice
 type dequeViaRingSlice[T any] struct {
 	v []T
 

@@ -1,14 +1,14 @@
 package collections
 
-type dictionaryViaMap[TKey comparable, TValue any] struct {
-	m map[TKey]TValue
+type dictionaryViaMap[K comparable, V any] struct {
+	m map[K]V
 }
 
 var _ interface{ Dictionary[int, int] } = (*dictionaryViaMap[int, int])(nil)
 
-func newDictionaryViaMap[TKey comparable, TValue any]() *dictionaryViaMap[TKey, TValue] {
-	return &dictionaryViaMap[TKey, TValue]{
-		m: make(map[TKey]TValue),
+func newDictionaryViaMap[K comparable, V any]() *dictionaryViaMap[K, V] {
+	return &dictionaryViaMap[K, V]{
+		m: make(map[K]V),
 	}
 }
 

@@ -19,15 +19,15 @@ type (
 	}
 
 	// A Dictionary is a collection of key value pairs.
-	Dictionary[TKey, TValue any] interface {
+	Dictionary[K, V any] interface {
 		Clear()
-		Delete(key TKey)
-		ForEach(callback func(Pair[TKey, TValue]) bool)
-		Get(key TKey) (value TValue, ok bool)
-		Keys() Collection[TKey]
-		Set(key TKey, value TValue)
+		Delete(key K)
+		ForEach(callback func(Pair[K, V]) bool)
+		Get(key K) (value V, ok bool)
+		Keys() Collection[K]
+		Set(key K, value V)
 		Size() int
-		Values() Collection[TValue]
+		Values() Collection[V]
 	}
 
 	// A Queue is a collection that supports FIFO operations.
@@ -65,8 +65,8 @@ func NewDeque[T any]() Deque[T] {
 }
 
 // NewDictionary creates a new Dictionary implemented using a map.
-func NewDictionary[TKey comparable, TValue any]() Dictionary[TKey, TValue] {
-	return newDictionaryViaMap[TKey, TValue]()
+func NewDictionary[K comparable, V any]() Dictionary[K, V] {
+	return newDictionaryViaMap[K, V]()
 }
 
 // NewQueue creates a new Queue implemented using a slice.
@@ -90,8 +90,8 @@ func NewSlice[T any](collection Collection[T]) []T {
 }
 
 // NewSortedDictionary creates a new Dictionary implemented using a btree, providing sorted iteration by the less function.
-func NewSortedDictionary[TKey, TValue any](less func(TKey, TKey) bool) Dictionary[TKey, TValue] {
-	return newDictionaryViaBTree[TKey, TValue](less)
+func NewSortedDictionary[K, V any](less func(K, K) bool) Dictionary[K, V] {
+	return newDictionaryViaBTree[K, V](less)
 }
 
 // NewSortedSet creates a new Set implemented using a btree, providing sorted iteration by the less function.
