@@ -12,15 +12,15 @@ func newDictionaryViaMap[K comparable, V any]() *dictionaryViaMap[K, V] {
 	}
 }
 
-func (d *dictionaryViaMap[TKey, TValue]) Clear() {
-	d.m = make(map[TKey]TValue)
+func (d *dictionaryViaMap[K, V]) Clear() {
+	d.m = make(map[K]V)
 }
 
-func (d *dictionaryViaMap[TKey, TValue]) Delete(key TKey) {
+func (d *dictionaryViaMap[K, V]) Delete(key K) {
 	delete(d.m, key)
 }
 
-func (d *dictionaryViaMap[TKey, TValue]) ForEach(callback func(entry Pair[TKey, TValue]) bool) {
+func (d *dictionaryViaMap[K, V]) ForEach(callback func(entry Pair[K, V]) bool) {
 	for k, v := range d.m {
 		if !callback(NewPair(k, v)) {
 			return
@@ -28,27 +28,27 @@ func (d *dictionaryViaMap[TKey, TValue]) ForEach(callback func(entry Pair[TKey, 
 	}
 }
 
-func (d *dictionaryViaMap[TKey, TValue]) Get(key TKey) (value TValue, ok bool) {
+func (d *dictionaryViaMap[K, V]) Get(key K) (value V, ok bool) {
 	value, ok = d.m[key]
 	return value, ok
 }
 
-func (d *dictionaryViaMap[TKey, TValue]) Keys() Collection[TKey] {
-	return Map[Pair[TKey, TValue]](d, func(pair Pair[TKey, TValue]) TKey {
+func (d *dictionaryViaMap[K, V]) Keys() Collection[K] {
+	return Map[Pair[K, V]](d, func(pair Pair[K, V]) K {
 		return pair.First
 	})
 }
 
-func (d *dictionaryViaMap[TKey, TValue]) Set(key TKey, value TValue) {
+func (d *dictionaryViaMap[K, V]) Set(key K, value V) {
 	d.m[key] = value
 }
 
-func (d *dictionaryViaMap[TKey, TValue]) Size() int {
+func (d *dictionaryViaMap[K, V]) Size() int {
 	return len(d.m)
 }
 
-func (d *dictionaryViaMap[TKey, TValue]) Values() Collection[TValue] {
-	return Map[Pair[TKey, TValue]](d, func(pair Pair[TKey, TValue]) TValue {
+func (d *dictionaryViaMap[K, V]) Values() Collection[V] {
+	return Map[Pair[K, V]](d, func(pair Pair[K, V]) V {
 		return pair.Second
 	})
 }
